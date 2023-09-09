@@ -1,6 +1,7 @@
 package kopring.abc.domain
 
 import jakarta.persistence.Entity
+import jakarta.persistence.EntityListeners
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
@@ -11,10 +12,12 @@ import org.springframework.data.annotation.CreatedBy
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.LastModifiedBy
 import org.springframework.data.annotation.LastModifiedDate
+import org.springframework.data.jpa.domain.support.AuditingEntityListener
 import java.time.Instant
 
 @Entity
 @Table(name = "songs")
+@EntityListeners(AuditingEntityListener::class)
 class Song(
     var title: String? = null,
     @ManyToOne
@@ -32,6 +35,10 @@ class Song(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long = 0L
+
+    fun associateWith(album: Album) {
+        this.album = album
+    }
 
     companion object {
         fun fixture(id: Long = 1L, title: String = "시를 위한 시"): Song {
