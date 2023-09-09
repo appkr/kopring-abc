@@ -6,6 +6,7 @@ import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.JoinColumn
 import jakarta.persistence.ManyToOne
+import jakarta.persistence.Table
 import org.springframework.data.annotation.CreatedBy
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.LastModifiedBy
@@ -13,6 +14,7 @@ import org.springframework.data.annotation.LastModifiedDate
 import java.time.Instant
 
 @Entity
+@Table(name = "songs")
 class Song(
     var title: String? = null,
     @ManyToOne
@@ -33,9 +35,12 @@ class Song(
 
     companion object {
         fun fixture(id: Long = 1L, title: String = "시를 위한 시"): Song {
-            val fixture = Song(title)
-            fixture.id = id
-            return fixture
+            return Song(title)
+                .apply {
+                    this.id = id
+                    this.createdBy = "UNKNOWN"
+                    this.updatedBy = "UNKNOWN"
+                }
         }
     }
 

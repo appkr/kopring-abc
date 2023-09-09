@@ -1,10 +1,12 @@
 package kopring.abc.domain
 
+import jakarta.persistence.CascadeType
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.OneToMany
+import jakarta.persistence.Table
 import org.springframework.data.annotation.CreatedBy
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.LastModifiedBy
@@ -12,9 +14,10 @@ import org.springframework.data.annotation.LastModifiedDate
 import java.time.Instant
 
 @Entity
+@Table(name = "albums")
 class Album(
     var title: String? = null,
-    @OneToMany(mappedBy = "album")
+    @OneToMany(mappedBy = "album", cascade = [CascadeType.ALL], orphanRemoval = true)
     var songs: MutableList<Song> = mutableListOf(),
     @CreatedBy
     var createdBy: String? = null,
@@ -38,9 +41,12 @@ class Album(
 
     companion object {
         fun fixture(id: Long = 1L): Album {
-            val fixture = Album("이문세5집")
-            fixture.id = id
-            return fixture
+            return Album("이문세5집")
+                .apply {
+                    this.id = id
+                    this.createdBy = "UNKNOWN"
+                    this.updatedBy = "UNKNOWN"
+                }
         }
     }
 
