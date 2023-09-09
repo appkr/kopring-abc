@@ -40,8 +40,8 @@ class Album(
     }
 
     companion object {
-        fun fixture(id: Long = 1L): Album {
-            return Album("이문세5집")
+        fun fixture(id: Long = 1L, title: String = "이문세5집"): Album {
+            return Album(title)
                 .apply {
                     this.id = id
                     this.createdBy = "UNKNOWN"

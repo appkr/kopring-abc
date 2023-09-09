@@ -28,6 +28,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     testImplementation("org.jetbrains.kotlin:kotlin-reflect:kotlin-test-junit5")
     testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
     runtimeOnly("com.h2database:h2")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     implementation("io.github.microutils:kotlin-logging-jvm:3.0.5")
