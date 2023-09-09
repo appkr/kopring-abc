@@ -8,6 +8,7 @@ import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.OneToMany
 import jakarta.persistence.Table
+import jakarta.validation.constraints.NotNull
 import org.springframework.data.annotation.CreatedBy
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.LastModifiedBy
@@ -19,6 +20,7 @@ import java.time.Instant
 @Table(name = "albums")
 @EntityListeners(AuditingEntityListener::class)
 class Album(
+    @field:NotNull
     var title: String? = null,
     @OneToMany(mappedBy = "album", cascade = [CascadeType.ALL], orphanRemoval = true)
     var songs: MutableList<Song> = mutableListOf(),

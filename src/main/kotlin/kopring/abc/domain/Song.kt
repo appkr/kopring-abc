@@ -8,6 +8,7 @@ import jakarta.persistence.Id
 import jakarta.persistence.JoinColumn
 import jakarta.persistence.ManyToOne
 import jakarta.persistence.Table
+import jakarta.validation.constraints.NotNull
 import org.springframework.data.annotation.CreatedBy
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.LastModifiedBy
@@ -19,6 +20,7 @@ import java.time.Instant
 @Table(name = "songs")
 @EntityListeners(AuditingEntityListener::class)
 class Song(
+    @field:NotNull
     var title: String? = null,
     @ManyToOne
     @JoinColumn(name = "album_id")

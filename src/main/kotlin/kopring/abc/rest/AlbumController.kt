@@ -1,5 +1,6 @@
 package kopring.abc.rest
 
+import jakarta.validation.Valid
 import kopring.abc.domain.Album
 import kopring.abc.service.AlbumService
 import org.springframework.http.ResponseEntity
@@ -18,7 +19,7 @@ class AlbumController(
     private val service: AlbumService
 ) {
     @PostMapping("/albums")
-    fun createAlbum(@RequestBody dto: Album): ResponseEntity<ApiResponse> {
+    fun createAlbum(@Valid @RequestBody dto: Album): ResponseEntity<ApiResponse> {
         return service.createAlbum(dto)
             .let {
                 return ResponseEntity.ok(ApiResponse(data = it))
